@@ -26,5 +26,7 @@ jobs:
         submodules: recursive
     - name: Install dependencies
       run: yarn install
+    - name: Build package
+      run: yarn build
     - name: Run tests
       run: yarn test
