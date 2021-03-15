@@ -1,0 +1,27 @@
+{
+  "name": "prettier-plugin-md-nocjsp",
+  "version": "1.0.0",
+  "description": "Prettier Markdown plugin to prevent inserting spaces between Chinese or Japanese & latin latters",
+  "main": "src/index.js",
+  "repository": "https://github.com/tats-u/prettier-plugin-md-nocjsp",
+  "author": "Tatsunori Uchino",
+  "license": "MIT",
+  "scripts": {
+    "test": "prettier --plugin . --parser markdown-nocjsp ./assets/*.md -c"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  },
+  "dependencies": {
+    "cjk-regex": "2.0.0",
+    "escape-string-regexp": "4.0.0",
+    "linguist-languages": "7.12.1",
+    "outdent": "0.7.1",
+    "remark-footnotes": "2.0.0",
+    "remark-math": "3.0.1",
+    "remark-parse": "8.0.3",
+    "semver": "7.3.2",
+    "string-width": "4.2.0",
+    "unified": "9.2.0"
+  }
+}
