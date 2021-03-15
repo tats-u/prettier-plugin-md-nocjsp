@@ -11,7 +11,7 @@
     "src"
   ],
   "scripts": {
-    "test": "prettier --plugin . --parser markdown-nocjsp ./assets/*.md -c",
+    "test": "prettier --plugin . --parser markdown-nocjsp ./assets/*.md -f",
     "build": "rollup -c"
   },
   "devDependencies": {
