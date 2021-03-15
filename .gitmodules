@@ -1,0 +1,5 @@
+[submodule "src/prettier"]
+	path = src/prettier
+	url = https://github.com/prettier/prettier.git
+[submodule "prettier"]
+	branch = 2.2.1
