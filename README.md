@@ -105,7 +105,7 @@ Markdown in Markown like the below does not work as intended.
 ```
 ``````
 
-Spaces will be inserted.  This is [Prettier's issue](https://github.com/prettier/prettier/issues/5919).
+Spaces will be inserted.  This is because of [Prettier's issue](https://github.com/prettier/prettier/issues/5919) but considered to be mitigable in the future.
 
 ## License
 
