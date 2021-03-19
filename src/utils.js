@@ -125,6 +125,7 @@ function splitText(text, options) {
   function appendNode(node) {
     const lastNode = getLast(nodes);
     if (lastNode && lastNode.type === "word") {
+      // Most important change: remove adding space
       if (
         !isBetween(KIND_NON_CJK, KIND_CJK_PUNCTUATION) &&
         !isBetween(KIND_CJK_PUNCTUATION, KIND_NON_CJK) &&

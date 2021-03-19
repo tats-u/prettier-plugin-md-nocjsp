@@ -11,6 +11,11 @@ const {
 const { print: printFrontMatter } = require("./prettier/src/utils/front-matter");
 const { getFencedCodeBlockValue } = require("./prettier/src/language-markdown/utils");
 
+/**
+ * Patch function to block upstream parser
+ * @param {*} lang Language name just after ```
+ * @returns censored language name
+ */
 function modifyLanguage(lang) {
   switch (lang) {
     case "markdown":
@@ -26,6 +31,7 @@ function embed(path, print, textToDoc, options) {
   const node = path.getValue();
 
   if (node.type === "code" && node.lang !== null) {
+    // add patch (intervenes in external parser call)
     const parser = inferParserByLanguage(modifyLanguage(node.lang), options);
     if (parser) {
       const styleUnit = options.__inJsTemplate ? "~" : "`";

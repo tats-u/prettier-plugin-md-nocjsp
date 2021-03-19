@@ -4,6 +4,7 @@ const createLanguage = require("./prettier/src/utils/create-language");
 const printer = require("./printer-markdown");
 const options = require("./prettier/src/language-markdown/options");
 
+// We have to change names of parsers & AST
 const languages = [
   createLanguage(require("linguist-languages/data/Markdown.json"), (data) => ({
     since: "1.8.0",
