@@ -95,18 +95,6 @@ Even in Chinese, the act of inserting U+0020 is not the only standard, and takes
 
 **TL;DR: inserting spaces (but not U+0020 itself) is the job of viewers and such, not formatters like Prettier!!!  PRETTIER MUST """NEVER""" BREAK DOCUMENTS BY DOING SUCH A THING!!!!  ONCE IT DO, IT CAN """NEVER""" UNDO!!!**
 
-## Restriction
-
-Markdown in Markown like the below does not work as intended.
-
-``````markdown
-```markdown
-漢字Alphabetひらがな012カタカナ345汉字
-```
-``````
-
-Spaces will be inserted.  This is because of [Prettier's issue](https://github.com/prettier/prettier/issues/5919) but considered to be mitigable in the future.
-
 ## License
 
 MIT License (same as Prettier itself)

@@ -26,7 +26,7 @@ const {
   printer: { printDocToString },
 } = require("./prettier/src/document");
 const { replaceEndOfLineWith } = require("./prettier/src/common/util");
-const embed = require("./prettier/src/language-markdown/embed");
+const embed = require("./embed");
 const { insertPragma } = require("./prettier/src/language-markdown/pragma");
 const { locStart, locEnd } = require("./prettier/src/language-markdown/loc");
 const preprocess = require("./print-preprocess");
