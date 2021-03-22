@@ -35,6 +35,12 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install dependencies
         run: yarn install
+      - uses: actions/cache@v2
+        id: build-cache
+        with:
+          path: dist
+          key: ${{ runner.os }}-build-${{ github.sha }}
+        if: runner.os == 'Linux'
       - name: Build package
         run: yarn build
       - name: Run tests
@@ -45,26 +51,6 @@ jobs:
       - test-again
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js And Setup .npmrc
-        uses: actions/setup-node@v1
-        with:
-          node-version: "14"
-          registry-url: "https://registry.npmjs.org"
-      - name: Create a Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
-          tag_name: ${{ github.ref }}
-          # The name of the release. For example, `Release v1.0.1`
-          release_name: Release ${{ github.ref }}
-      - name: Get the version
-        id: get_version
-        run: |
-          echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
-          echo ::set-output name=DEB_NAME::$(basename $(ls ${{ runner.temp }}/deb-package/*.deb | tail -n 1))
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -75,11 +61,38 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+      - name: Get the version
+        id: get_version
+        run: |
+          echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+          echo ::set-output name=DEB_NAME::$(basename $(ls ${{ runner.temp }}/deb-package/*.deb | tail -n 1))
       - name: Install dependencies
         run: yarn install
+      - uses: actions/cache@v2
+        id: build-cache
+        with:
+          path: dist
+          key: ${{ runner.os }}-build-${{ github.sha }}
       - name: Build package
-        run: yarn build
+        run: "[[ -f dist/main.js ]] || yarn build"
+      - name: Prepare to publish
+        run: |
+          cat > ~/.npmrc <<EOF
+          //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+          registry=https://registry.npmjs.org/
+          always-auth=true
+          EOF
       - name: Publish module
         run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Create a Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
+          tag_name: ${{ github.ref }}
+          # The name of the release. For example, `Release v1.0.1`
+          release_name: Release ${{ github.ref }}
