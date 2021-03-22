@@ -3,8 +3,8 @@
 ![Prettier Logo](https://raw.githubusercontent.com/prettier/prettier-logo/master/images/prettier-banner-light.png)
 ![Logo](./assets/logo.png)
 
-![[CI (master)](https://github.com/tats-u/prettier-plugin-md-nocjsp/actions/workflows/master.yml)](<https://github.com/tats-u/prettier-plugin-md-nocjsp/workflows/CI%20(master)/badge.svg>)
-![[CI (Release)](https://github.com/tats-u/prettier-plugin-md-nocjsp/actions/workflows/release.yml)](<https://github.com/tats-u/prettier-plugin-md-nocjsp/workflows/CI%20(Release)/badge.svg>)
+[![CI (master)](https://github.com/tats-u/prettier-plugin-md-nocjsp/workflows/CI%20(master)/badge.svg)](https://github.com/tats-u/prettier-plugin-md-nocjsp/actions/workflows/master.yml)
+[![CI (Release)](https://github.com/tats-u/prettier-plugin-md-nocjsp/workflows/CI%20(Release)/badge.svg)](https://github.com/tats-u/prettier-plugin-md-nocjsp/actions/workflows/release.yml)
 [![npm version](https://badge.fury.io/js/prettier-plugin-md-nocjsp.svg)](https://badge.fury.io/js/prettier-plugin-md-nocjsp)
 
 This plugin prevents Prettier from inserting spaces between Chinese or Japanese letters (e.g. Han aka Kanji & Hiragana & Katakana)  and alphabets or numbers in your Markdown documents.
