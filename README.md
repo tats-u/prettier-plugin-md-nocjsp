@@ -77,35 +77,75 @@ Japanese:
 
 A:
 
-  Note that Western word space (cl-26) is a one third em space, in principle, except at line head, line head of warichu, line end and line end of warichu.
-
-  “one third em” means one third of the full-width size. (JIS Z 8125)
-  “one third em space” means amount of space that is one third size of em space.
+> Note that Western word space (cl-26) is a one third em space, in principle, except at line head, line head of warichu, line end and line end of warichu.
+>
+> なお，欧文間隔（cl-26）は，三分アキを原則とする．
 
 <https://www.w3.org/TR/jlreq/#mixed_text_composition_in_horizontal_writing_mode>
+
+> Inter-character spacing, between hiragana (cl-15), katakana (cl-16) or ideographic characters (cl-19) and Western characters or European numerals, is quarter em spacing (see Figure 102). The issue as to whether the quarter em spacing can be used for line end adjustment or not is discussed in § 3.8.2 Reduction and Addition of Inter-Character Spacing 詰める処理と空ける処理 and § 3.8.4 Procedures for Inter-Character Space Expansion 空ける処理の優先順位 .
+>
+> 欧字・アラビア数字の前後に配置される平仮名（cl-15），片仮名（cl-16）又は漢字等（cl-19）との字間は，四分アキとする（Figure 102）．（この四分アキを行の調整処理に使用する場合の詳細については§ 3.8.2 Reduction and Addition of Inter-Character Spacing 詰める処理と空ける処理 及び§ 3.8.4 Procedures for Inter-Character Space Expansion 空ける処理の優先順位 を参照．）
+
+<https://www.w3.org/TR/jlreq/#handling_of_western_text_in_japanese_text_using_proportional_western_fonts>
+
+> “one third em” means one third of the full-width size. (JIS Z 8125)
+> “one third em space” means amount of space that is one third size of em space.
+> 三分 = 全角の3分の1の長さ．（JIS Z 8125）
+> 三分アキ = 三分の空き量．
 
 <https://www.w3.org/TR/jlreq/#term.one-third-em>
 <https://www.w3.org/TR/jlreq/#term.one-third-em-space>
 
+> “one quarter em” means quarter size of full-width. (JIS Z 8125)
+> “one quarter em” means amount of space that is a quarter of an em space in size.
+> 四分 = 全角の4分の1の長さ．（JIS Z 8125）
+> 四分アキ = 四分の空き量．
+
+<https://www.w3.org/TR/jlreq/#term.quarter-em>
+<https://www.w3.org/TR/jlreq/#term.quarter-em-space>
+
 B (JIS X 4051:2004):
 
-  横書きでは，和文と欧文との間の空き量は，四分アキを原則とする。
-  In horizontal writing, the space between Japanese and European text should be one quarter em, as a rule.
-  (Translation is based on DeepL)
+> 3.b6 欧文間隔 欧文の単語間の空きを表現する文字。
+> “欧文間隔” means a character that represents the space between words in European text.
+>
+> 4.7a 欧文間隔は，三分アキを原則とする。
+> The space between European words should be one third em, as a rule.
+>
+> 4.6d 横書きでは，和文と欧文との間の空き量は，四分アキを原則とする。
+> In horizontal writing, the space between Japanese and European text should be one quarter em, as a rule.
+> (Translation is based on DeepL)
 
 <https://kikakurui.com/x4/X4051-2004-02.html>
 
 Chinese:
 
-  In principle, there is tracking or spacing between an adjacent Han character and a Western character of up to one quarter of a Han character width, except at the line start or end.
-  Another approach is to use a Western word space (U+0020 SPACE), in which case the width depends on the font in use.
+ > In principle, there is tracking or spacing between an adjacent Han character and a Western character of up to one quarter of a Han character width, except at the line start or end.
+> 横排时，西文使用比例字体；阿拉伯数字则常用比例字体或等宽字体。原则上，汉字与西文字母、数字间使用不多于四分之一个汉字宽的字距或空白。但西文出现在行首或行尾时，则无须加入空白。
+> NOTE: Another approach is to use a Western word space (U+0020 SPACE), in which case the width depends on the font in use.
+> 或可使用西文词间空格（U+0020 SPACE [ ]，其宽度随不同字体有所变化）。
 
 <https://www.w3.org/TR/clreq/#mixed_text_composition_in_horizontal_writing_mode>
 
-Anyway, the length of spaces between different types of characters is based on Han characters (or Hiragana / Katakana).
-The image below shows that the spacing between hiragana or kanji and alphabets is 1/4 of the length of the former and that it is different from the spacing between English words. (used: Microsoft Word)
+The following table shows that the widths of spaces between Han and western characters, and between western words in both languages are different.
 
-![rendering in MS Word](https://user-images.githubusercontent.com/12870451/92094047-f8d6c900-ee0e-11ea-8164-2fc7d54cdeb7.png)
+|      | Japanese    | Chinese          |
+|------|-------------|------------------|
+| 文␣A | 1/4 of “文” | 1/4 of “文”      |
+| A␣B  | 1/3 of “文” | Depends on fonts |
+
+Also in text style guide lines for both languages (especially Japanese), using U+0020 is not the only rule.
+
+The image below shows that the spacing between hiragana or kanji and alphabets is 1/4 of the length of the former and that it is different from the spacing between English words. (used: Microsoft Word + Yu Mincho)
+
+![Japanese rendering in Word](https://user-images.githubusercontent.com/12870451/112154796-f5c6ed00-8c27-11eb-86c2-291648286f87.png)
+
+3 underlined Hiraganas “あ” have the same width as 12 Han-alphabet spaces (do not consider “m” just after “二”; t)
+
+![Space width in Word](https://user-images.githubusercontent.com/12870451/112154800-f6f81a00-8c27-11eb-8c7d-15b2aa5c8b1e.png)
+
+In MS Word, the width of a space between Western words is not one quarter or third of that of Hiragana or Han.  (= Chinese rule)
 
 Even in Chinese, the act of inserting U+0020 is not the only standard, and takes away the option of document viewers and converters to insert spaces a quarter of the width of Han characters, which is unacceptable. The spacing between Han characters and the alphabet should be left to them. At least Prettier must not manage spacing in place of them (P.S. idealy).
 
