@@ -15,33 +15,45 @@ This plugin prevents Prettier from inserting spaces between Chinese or Japanese 
 
 ## How to use
 
-This plug-in has not yet established a means of bundling and distribution in NPM.  So if you want to use this right now, try the following:
+You can try this plugin by:
 
 ```bash
-git clone --recursive https://github.com/tats-u/prettier-plugin-md-nocjsp.git
-cd prettier-plugin-md-nocjsp
-yarn install
-# *snip*
-prettier --plugin path/to/prettier-plugin-md-nocjsp --parser markdown-nocjsp *.md
+# or `npm install --save-dev prettier-plugin-md-nocjsp`
+yarn add -D prettier-plugin-md-nocjsp
+
+yarn prettier --parser markdown-nocjsp *.md | less
 ```
 
-This .prettierrc may work:
+If you favorite the output by this plugin, you may want to add `.prettierrc` like the below to your project root:
 
 ```yaml
 # *snip*
 overrides:
   - files:
-      - *.md
+      - "*.md"
       - README
     options:
       parser: markdown-nocjsp
   - files:
-      - *.mdx
+      - "*.mdx"
     options:
       parser: mdx-nocjsp
 ```
 
-However, you cannot omit `--plugin path/to/prettier-plugin-md-nocjsp` option when running the Prettier CLI.
+Then you can format documents using this plugin just by:
+
+```bash
+# format only Markdown documents in the current directory
+#
+# `yarn` should be removed in `scripts` in `package.json`
+yarn prettier -w *.md
+```
+
+You may want to check whether all documents have been formatted by:
+
+```bash
+yarn prettier -l *.md
+```
 
 ## Why this plugin is needed
 
@@ -98,6 +110,29 @@ The image below shows that the spacing between hiragana or kanji and alphabets i
 Even in Chinese, the act of inserting U+0020 is not the only standard, and takes away the option of document viewers and converters to insert spaces a quarter of the width of Han characters, which is unacceptable. The spacing between Han characters and the alphabet should be left to them. At least Prettier must not manage spacing in place of them (P.S. idealy).
 
 **TL;DR: inserting spaces (but not U+0020 itself) is the job of viewers and such, not formatters like Prettier!!!  PRETTIER MUST """NEVER""" BREAK DOCUMENTS BY DOING SUCH A THING!!!!  ONCE IT DO, IT CAN """NEVER""" UNDO!!!**
+
+## Use this repository directly
+
+Clone and build this repository by:
+
+```bash
+git clone --recursive https://github.com/tats-u/prettier-plugin-md-nocjsp.git
+cd prettier-plugin-md-nocjsp
+yarn install
+yarn build
+```
+
+Then you can try it by:
+
+```bash
+yarn prettier test.md --parser markdown-nocjsp --plugin path/to/prettier-plugin-md-nocjsp
+```
+
+You can test it without `yarn build`:
+
+```bash
+yarn prettier test.md --parser markdown-nocjsp --plugin path/to/prettier-plugin-md-nocjsp/index.js
+```
 
 ## License
 
