@@ -15,7 +15,8 @@ This plugin prevents Prettier from inserting spaces between Chinese or Japanese 
 
 ## How to use
 
-You can try this plugin by:
+You can try this plugin by:  
+このプラグインは次のコマンドでお試し可能です。
 
 ```bash
 # or `npm install --save-dev prettier-plugin-md-nocjsp`
@@ -24,7 +25,8 @@ yarn add -D prettier-plugin-md-nocjsp
 yarn prettier --parser markdown-nocjsp *.md | less
 ```
 
-If you favorite the output by this plugin, you may want to add `.prettierrc` like the below to your project root:
+If you like the output by this plugin, you may want to add `.prettierrc` like the below to your project root:  
+出力が気に入りましたら、次のような`.prettierrc`をプロジェクトルートに追加してください。
 
 ```yaml
 # *snip*
@@ -40,7 +42,8 @@ overrides:
       parser: mdx-nocjsp
 ```
 
-Then you can format documents using this plugin just by:
+Then you can format documents using this plugin just by:  
+次のコマンドさえ打てば、本プラグインを用いてMarkdown文書を整形することができます。
 
 ```bash
 # format only Markdown documents in the current directory
@@ -49,7 +52,8 @@ Then you can format documents using this plugin just by:
 yarn prettier -w *.md
 ```
 
-You may want to check whether all documents have been formatted by:
+You may want to check whether all documents have been formatted by:  
+次のようなコマンドで、全文書が整形されているかどうかを確認できます。
 
 ```bash
 yarn prettier -l *.md
