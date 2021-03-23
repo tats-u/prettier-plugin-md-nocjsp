@@ -6,6 +6,12 @@
   "repository": "https://github.com/tats-u/prettier-plugin-md-nocjsp",
   "author": "Tatsunori Uchino",
   "license": "MIT",
+  "keywords": [
+    "prettier",
+    "plugin",
+    "markdown",
+    "japanese"
+  ],
   "files": [
     "dist/main.js"
   ],
