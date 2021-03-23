@@ -141,7 +141,7 @@ The image below shows that the spacing between hiragana or kanji and alphabets i
 
 ![Japanese rendering in Word](https://user-images.githubusercontent.com/12870451/112154796-f5c6ed00-8c27-11eb-86c2-291648286f87.png)
 
-3 underlined Hiraganas “あ” have the same width as 12 Han-alphabet spaces (do not consider “m” just after “二”; t)
+3 underlined Hiraganas “あ” have the same width as 12 Han-alphabet spaces (do not consider those around “m”; they appear in both lines)
 
 ![Space width in Word](https://user-images.githubusercontent.com/12870451/112154800-f6f81a00-8c27-11eb-8c7d-15b2aa5c8b1e.png)
 
