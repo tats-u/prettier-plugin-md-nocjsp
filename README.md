@@ -59,6 +59,11 @@ You may want to check whether all documents have been formatted by:
 yarn prettier -l *.md
 ```
 
+## Examples
+
+See the Markdown documents in the [assets](./assets) directory.  
+[assets](./assets)ディレクトリ内のMarkdown文書を御覧ください。
+
 ## Why this plugin is needed
 
 Here is an example of markdown document:
