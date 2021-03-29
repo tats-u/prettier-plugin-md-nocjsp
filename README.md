@@ -187,4 +187,4 @@ yarn prettier test.md --parser markdown-nocjsp --plugin path/to/prettier-plugin-
 
 MIT License (same as Prettier itself)
 
-This plugin reuse Prettier's code.
+This plugin reuses Prettier's code.
