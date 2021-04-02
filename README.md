@@ -103,17 +103,17 @@ W3C:
 
 <https://www.w3.org/TR/jlreq/#handling_of_western_text_in_japanese_text_using_proportional_western_fonts>
 
-> “one third em” means one third of the full-width size. (JIS Z 8125)
-> “one third em space” means amount of space that is one third size of em space.
-> 三分 = 全角の3分の1の長さ．（JIS Z 8125）
+> “one third em” means one third of the full-width size. (JIS Z 8125)  
+> “one third em space” means amount of space that is one third size of em space.  
+> 三分 = 全角の3分の1の長さ．（JIS Z 8125）  
 > 三分アキ = 三分の空き量．
 
 <https://www.w3.org/TR/jlreq/#term.one-third-em>
 <https://www.w3.org/TR/jlreq/#term.one-third-em-space>
 
-> “one quarter em” means quarter size of full-width. (JIS Z 8125)
-> “one quarter em” means amount of space that is a quarter of an em space in size.
-> 四分 = 全角の4分の1の長さ．（JIS Z 8125）
+> “one quarter em” means quarter size of full-width. (JIS Z 8125)  
+> “one quarter em” means amount of space that is a quarter of an em space in size.  
+> 四分 = 全角の4分の1の長さ．（JIS Z 8125）  
 > 四分アキ = 四分の空き量．
 
 <https://www.w3.org/TR/jlreq/#term.quarter-em>
@@ -121,23 +121,23 @@ W3C:
 
 JIS X 4051:2004:
 
-> 3.b6 欧文間隔 欧文の単語間の空きを表現する文字。
+> 3.b6 欧文間隔 欧文の単語間の空きを表現する文字。  
 > “欧文間隔” means a character that represents the space between words in European text.
 >
-> 4.7a 欧文間隔は，三分アキを原則とする。
+> 4.7a 欧文間隔は，三分アキを原則とする。  
 > The space between European words should be one third em, as a rule.
 >
-> 4.6d 横書きでは，和文と欧文との間の空き量は，四分アキを原則とする。
-> In horizontal writing, the space between Japanese and European text should be one quarter em, as a rule.
+> 4.6d 横書きでは，和文と欧文との間の空き量は，四分アキを原則とする。  
+> In horizontal writing, the space between Japanese and European text should be one quarter em, as a rule.  
 > (Translation is based on DeepL)
 
 <https://kikakurui.com/x4/X4051-2004-02.html>
 
 Chinese (W3C):
 
- > In principle, there is tracking or spacing between an adjacent Han character and a Western character of up to one quarter of a Han character width, except at the line start or end.
-> 横排时，西文使用比例字体；阿拉伯数字则常用比例字体或等宽字体。原则上，汉字与西文字母、数字间使用不多于四分之一个汉字宽的字距或空白。但西文出现在行首或行尾时，则无须加入空白。
-> NOTE: Another approach is to use a Western word space (U+0020 SPACE), in which case the width depends on the font in use.
+ > In principle, there is tracking or spacing between an adjacent Han character and a Western character of up to one quarter of a Han character width, except at the line start or end.  
+> 横排时，西文使用比例字体；阿拉伯数字则常用比例字体或等宽字体。原则上，汉字与西文字母、数字间使用不多于四分之一个汉字宽的字距或空白。但西文出现在行首或行尾时，则无须加入空白。  
+> NOTE: Another approach is to use a Western word space (U+0020 SPACE), in which case the width depends on the font in use.  
 > 或可使用西文词间空格（U+0020 SPACE [ ]，其宽度随不同字体有所变化）。
 
 <https://www.w3.org/TR/clreq/#mixed_text_composition_in_horizontal_writing_mode>
