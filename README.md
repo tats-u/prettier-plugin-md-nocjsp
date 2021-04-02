@@ -180,7 +180,7 @@ The following sentence is correct; we must not remove any spaces in it.
 As you can see, formatter like Prettier cannot tell if the spaces should be removed and help leaving them.  Once it did, it cannot be undone anymore.  
 このように、Pretierのようなフォーマットは半角スペースを除去するかはわからず、放置する他ありません。一回やったら、二度と戻せません。
 
-**TL;DR: inserting spaces (but not U+0020 itself) is the job of viewers and such, not formatters like Prettier!!!  PRETTIER MUST """NEVER""" BREAK DOCUMENTS BY DOING SUCH A THING!!!!  ONCE IT DO, IT CAN """NEVER""" UNDO!!!**
+**TL;DR: inserting spaces (but not U+0020 itself) is the job of viewers and such, not formatters like Prettier!!!  PRETTIER MUST """NEVER""" BREAK DOCUMENTS BY DOING SUCH A THING!!!!  ONCE IT DO, IT CAN """NEVER""" UNDO!!!**  
 要点: アキ（半角スペース自体ではない）を挿入する行為は表示ソフトの責務であり、Prettierのようなフォーマッタの責務ではありません！Prettierがこんなことをやらかすことにより、文書を破壊する行為は到底認められるものではありません。
 
 ## Use this repository directly
