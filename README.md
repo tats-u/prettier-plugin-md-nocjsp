@@ -164,7 +164,7 @@ The image below shows that the spacing between hiragana or kanji and alphabets i
 ![Space width in Word](https://user-images.githubusercontent.com/12870451/112154800-f6f81a00-8c27-11eb-8c7d-15b2aa5c8b1e.png)
 
 In MS Word, the width of a space between Western words is not one quarter or third of that of Hiragana or Han.  (= Chinese rule)  
-MS Wordっでは、英単語間のアキは三分でも四分でもありません。（中国語の規則のようです）
+MS Wordでは、英単語間のアキは三分でも四分でもありません。（中国語の規則のようです）
 
 Even in Chinese, the act of inserting U+0020 is not the only standard, and takes away the option of document viewers and converters to insert spaces a quarter of the width of Han characters, which is unacceptable. The spacing between Han characters and the alphabet should be left to them. At least Prettier must not manage spacing in place of them (idealy).  
 中国語であっても、半角スペースを挿入する行為は唯一の標準ではなく、文書表示ソフトや変換ソフトが全角の1/4幅（四分）のアキを挿入できなくしてしまいます。当然容認できるものではありません。漢字仮名・アルファベット間のアキはそれらのソフトに任せるべきです。最低でも、Prettierはそれらを差し置いてスペースを管理してはなりません（ならないのが理想的です）。
