@@ -23,18 +23,18 @@
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.2.0",
-    "cjk-regex": "2.0.0",
+    "cjk-regex": "2.0.1",
     "escape-string-regexp": "4.0.0",
-    "linguist-languages": "7.12.1",
-    "outdent": "0.7.1",
-    "prettier": "^2.2.1",
+    "linguist-languages": "7.14.0",
+    "outdent": "0.8.0",
+    "prettier": "^2.3.0",
     "remark-footnotes": "2.0.0",
     "remark-math": "3.0.1",
     "remark-parse": "8.0.3",
     "rollup": "^2.41.2",
     "rollup-plugin-terser": "^7.0.2",
-    "semver": "7.3.2",
-    "string-width": "4.2.0",
-    "unified": "9.2.0"
+    "semver": "7.3.5",
+    "string-width": "4.2.2",
+    "unified": "9.2.1"
   }
 }
