@@ -1,5 +1,6 @@
 "use strict";
 
+const getLast = require("./prettier/utils/get-last");
 const { splitText } = require("./utils");
 const {
   getOrderedListItemInfo,
@@ -82,7 +83,7 @@ function mergeChildren(ast, shouldMerge, mergeNode) {
       return node;
     }
     const children = node.children.reduce((current, child) => {
-      const lastChild = current[current.length - 1];
+      const lastChild = getLast(current);
       if (lastChild && shouldMerge(lastChild, child)) {
         current.splice(-1, 1, mergeNode(lastChild, child));
       } else {
@@ -168,7 +169,7 @@ function transformIndentedCodeblockAndMarkItsParentList(ast, options) {
 
 function markAlignedList(ast, options) {
   return mapAst(ast, (node, index, parentStack) => {
-    if (node.type === "list" && node.children.length !== 0) {
+    if (node.type === "list" && node.children.length > 0) {
       // if one of its parents is not aligned, it's not possible to be aligned in sub-lists
       for (let i = 0; i < parentStack.length; i++) {
         const parent = parentStack[i];
