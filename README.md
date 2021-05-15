@@ -3,11 +3,11 @@
 ![Prettier Logo](https://raw.githubusercontent.com/prettier/prettier-logo/master/images/prettier-banner-light.png)
 ![Logo](./assets/logo.png)
 
-[![CI (master)](https://github.com/tats-u/prettier-plugin-md-nocjsp/workflows/CI%20(master)/badge.svg)](https://github.com/tats-u/prettier-plugin-md-nocjsp/actions/workflows/master.yml)
-[![CI (Release)](https://github.com/tats-u/prettier-plugin-md-nocjsp/workflows/CI%20(Release)/badge.svg)](https://github.com/tats-u/prettier-plugin-md-nocjsp/actions/workflows/release.yml)
+[![CI (master)](<https://github.com/tats-u/prettier-plugin-md-nocjsp/workflows/CI%20(master)/badge.svg>)](https://github.com/tats-u/prettier-plugin-md-nocjsp/actions/workflows/master.yml)
+[![CI (Release)](<https://github.com/tats-u/prettier-plugin-md-nocjsp/workflows/CI%20(Release)/badge.svg>)](https://github.com/tats-u/prettier-plugin-md-nocjsp/actions/workflows/release.yml)
 [![npm version](https://badge.fury.io/js/prettier-plugin-md-nocjsp.svg)](https://badge.fury.io/js/prettier-plugin-md-nocjsp)
 
-This plugin prevents Prettier from inserting spaces between Chinese or Japanese letters (e.g. Han aka Kanji & Hiragana & Katakana)  and alphabets or numbers in your Markdown documents.
+This plugin prevents Prettier from inserting spaces between Chinese or Japanese letters (e.g. Han aka Kanji & Hiragana & Katakana) and alphabets or numbers in your Markdown documents.
 
 🇯🇵
 
@@ -83,9 +83,8 @@ Without this plugin, Prettier will insert spaces (U+0020) like as follows:
 Indeed, Japanese and Chinese typography stipulate that spaces similar to those inserted by Prettier.  
 確かに、日本語・中国語組版では、Prettierが挿入するものと似たスペースが挿入されます。
 
-Let us refer to the official text style guide lines.  They say:  
+Let us refer to the official text style guide lines. They say:  
 公式の組版規則を見てみると次のようになっています。
-
 
 Japanese:
 
@@ -135,18 +134,18 @@ JIS X 4051:2004:
 
 Chinese (W3C):
 
- > In principle, there is tracking or spacing between an adjacent Han character and a Western character of up to one quarter of a Han character width, except at the line start or end.  
+> In principle, there is tracking or spacing between an adjacent Han character and a Western character of up to one quarter of a Han character width, except at the line start or end.  
 > 横排时，西文使用比例字体；阿拉伯数字则常用比例字体或等宽字体。原则上，汉字与西文字母、数字间使用不多于四分之一个汉字宽的字距或空白。但西文出现在行首或行尾时，则无须加入空白。  
 > NOTE: Another approach is to use a Western word space (U+0020 SPACE), in which case the width depends on the font in use.  
 > 或可使用西文词间空格（U+0020 SPACE [ ]，其宽度随不同字体有所变化）。
 
 <https://www.w3.org/TR/clreq/#mixed_text_composition_in_horizontal_writing_mode>
 
-The following table summarizes the above quotes.  It shows that the widths of spaces between Han and western characters, and between western words in both languages are different.  
+The following table summarizes the above quotes. It shows that the widths of spaces between Han and western characters, and between western words in both languages are different.  
 上をまとめると、下表のようになります。和欧文字間・英単語間のスペースの幅が異なることが見て取れます。
 
 |      | Japanese    | Chinese          |
-|------|-------------|------------------|
+| ---- | ----------- | ---------------- |
 | 文␣A | 1/4 of “文” | 1/4 of “文”      |
 | A␣B  | 1/3 of “文” | Depends on fonts |
 
@@ -163,13 +162,13 @@ The image below shows that the spacing between hiragana or kanji and alphabets i
 
 ![Space width in Word](https://user-images.githubusercontent.com/12870451/112154800-f6f81a00-8c27-11eb-8c7d-15b2aa5c8b1e.png)
 
-In MS Word, the width of a space between Western words is not one quarter or third of that of Hiragana or Han.  (= Chinese rule)  
+In MS Word, the width of a space between Western words is not one quarter or third of that of Hiragana or Han. (= Chinese rule)  
 MS Wordでは、英単語間のアキは三分でも四分でもありません。（中国語の規則のようです）
 
 Even in Chinese, the act of inserting U+0020 is not the only standard, and takes away the option of document viewers and converters to insert spaces a quarter of the width of Han characters, which is unacceptable. The spacing between Han characters and the alphabet should be left to them. At least Prettier must not manage spacing in place of them (idealy).  
 中国語であっても、半角スペースを挿入する行為は唯一の標準ではなく、文書表示ソフトや変換ソフトが全角の1/4幅（四分）のアキを挿入できなくしてしまいます。当然容認できるものではありません。漢字仮名・アルファベット間のアキはそれらのソフトに任せるべきです。最低でも、Prettierはそれらを差し置いてスペースを管理してはなりません（ならないのが理想的です）。
 
-As described above, U+0020 must not be inserted between Han (or hiragana or katakana) and alphanumerics.  Then, can we remove those that have already injected easily?  NO!  
+As described above, U+0020 must not be inserted between Han (or hiragana or katakana) and alphanumerics. Then, can we remove those that have already injected easily? NO!  
 このように、漢字（仮名）・英数字の間に半角スペースは挿入してはなりません。ならば、既に挿入されてしまったものは簡単に除去できるのでしょうか？無理！
 
 The following sentence is correct; we must not remove any spaces in it.  
@@ -177,10 +176,10 @@ The following sentence is correct; we must not remove any spaces in it.
 
 > 作る means “make” in Japanese.
 
-As you can see, formatter like Prettier cannot tell if the spaces should be removed and help leaving them.  Once it did, it cannot be undone anymore.  
+As you can see, formatter like Prettier cannot tell if the spaces should be removed and help leaving them. Once it did, it cannot be undone anymore.  
 このように、Pretierのようなフォーマットは半角スペースを除去するかはわからず、放置する他ありません。一回やったら、二度と戻せません。
 
-**TL;DR: inserting spaces (but not U+0020 itself) is the job of viewers and such, not formatters like Prettier!!!  PRETTIER MUST """NEVER""" BREAK DOCUMENTS BY DOING SUCH A THING!!!!  ONCE IT DO, IT CAN """NEVER""" UNDO!!!**  
+**TL;DR: inserting spaces (but not U+0020 itself) is the job of viewers and such, not formatters like Prettier!!! PRETTIER MUST """NEVER""" BREAK DOCUMENTS BY DOING SUCH A THING!!!! ONCE IT DO, IT CAN """NEVER""" UNDO!!!**  
 要点: アキ（半角スペース自体ではない）を挿入する行為は表示ソフトの責務であり、Prettierのようなフォーマッタの責務ではありません！Prettierがこんなことをやらかすことにより、文書を破壊する行為は到底認められるものではありません。
 
 ## Use this repository directly

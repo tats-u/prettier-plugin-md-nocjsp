@@ -16,7 +16,8 @@
     "dist/main.js"
   ],
   "scripts": {
-    "test": "prettier --plugin . --parser markdown-nocjsp ./assets/*.md -c",
+    "test": "prettier --plugin . --parser markdown-nocjsp ./assets/*.md ./README.md -c",
+    "format-md": "prettier --plugin . --parser markdown-nocjsp ./assets/*.md ./README.md -w",
     "build": "rollup -c"
   },
   "devDependencies": {
