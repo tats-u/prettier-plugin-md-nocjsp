@@ -8,7 +8,7 @@ const {
   builders: { hardline, markAsRoot },
   utils: { replaceNewlinesWithLiterallines },
 } = require("./prettier/src/document");
-const printFrontMatter = require("./prettier/src/utils/front-matter");
+const printFrontMatter = require("./prettier/src/utils/front-matter/print");
 const { getFencedCodeBlockValue } = require("./prettier/src/language-markdown/utils");
 
 /**

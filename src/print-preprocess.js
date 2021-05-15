@@ -1,6 +1,6 @@
 "use strict";
 
-const getLast = require("./prettier/utils/get-last");
+const getLast = require("./prettier/src/utils/get-last");
 const { splitText } = require("./utils");
 const {
   getOrderedListItemInfo,
