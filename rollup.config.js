@@ -19,4 +19,11 @@ export default {
     format: "cjs",
     sourcemap: true,
   },
+  onwarn: (warning, warn) => {
+    // Unresolved dependencies must be error
+    if (warning.code === "UNRESOLVED_IMPORT") {
+      throw Error(warning.message);
+    }
+    warn(warning);
+  },
 };
