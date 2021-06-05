@@ -23,10 +23,9 @@ const {
     group,
     hardlineWithoutBreakParent,
   },
-  utils: { normalizeDoc },
+  utils: { normalizeDoc, replaceEndOfLineWith },
   printer: { printDocToString },
 } = require("./prettier/src/document");
-const { replaceEndOfLineWith } = require("./prettier/src/common/util");
 const embed = require("./embed");
 const { insertPragma } = require("./prettier/src/language-markdown/pragma");
 const { locStart, locEnd } = require("./prettier/src/language-markdown/loc");
@@ -837,10 +836,10 @@ function shouldRemainTheSameContent(path) {
 }
 
 /**
-* @param {string} url
-* @param {string[] | string} [dangerousCharOrChars]
-* @returns {string}
-*/
+ * @param {string} url
+ * @param {string[] | string} [dangerousCharOrChars]
+ * @returns {string}
+ */
 function printUrl(url, dangerousCharOrChars = []) {
   const dangerousChars = [
     " ",
