@@ -45,6 +45,8 @@ jobs:
         run: yarn build
       - name: Run tests
         run: yarn test
+        env:
+          NODE_OPTIONS: --enable-source-maps
   release:
     runs-on: ubuntu-latest
     needs:
