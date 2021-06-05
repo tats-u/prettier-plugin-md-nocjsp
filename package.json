@@ -17,6 +17,7 @@
   ],
   "scripts": {
     "test": "prettier --plugin . --parser markdown-nocjsp ./assets/*.md ./README.md -c",
+    "test:dev": "prettier --plugin ./src --parser markdown-nocjsp ./assets/*.md ./README.md -c",
     "format-md": "prettier --plugin . --parser markdown-nocjsp ./assets/*.md ./README.md -w",
     "build": "rollup -c"
   },
