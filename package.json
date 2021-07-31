@@ -19,7 +19,8 @@
     "test": "prettier --plugin . --parser markdown-nocjsp ./assets/*.md ./README.md -c",
     "test:dev": "prettier --plugin ./src --parser markdown-nocjsp ./assets/*.md ./README.md -c",
     "format-md": "prettier --plugin . --parser markdown-nocjsp ./assets/*.md ./README.md -w",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepare": "is-ci || husky install"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^19.0.0",
@@ -27,6 +28,8 @@
     "@rollup/plugin-node-resolve": "^13.0.0",
     "cjk-regex": "2.0.1",
     "escape-string-regexp": "4.0.0",
+    "husky": "^7.0.1",
+    "is-ci": "^3.0.0",
     "linguist-languages": "7.15.0",
     "lodash": "4.17.21",
     "outdent": "0.8.0",
