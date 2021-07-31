@@ -15,18 +15,32 @@ This plugin prevents Prettier from inserting spaces between Chinese or Japanese 
 
 ## How to use
 
-You can try this plugin by:  
-このプラグインは次のコマンドでお試し可能です。
+First, run `yarn init` or `npm init` in the project root directory unless you have already done or are going to install this plugin globally.  
+まず、プロジェクトルートディレクトリ上で、`yarn init`または`npm init`を実行してください。（すでにやっている場合や、グローバル環境にインストール予定の場合は除く）
+
+Next, install Prettier by:  
+次に、Prettierを次のコマンドでインストールしてください。
 
 ```bash
-# or `npm install --save-dev prettier-plugin-md-nocjsp`
+yarn add -D prettier
+
+# or (↓ when you prefer npm to yarn)
+
+npm install -D prettier
+```
+
+You can install and try this plugin by:  
+このプラグインは次のコマンドでインストール及びお試しが可能です。
+
+```bash
+# or `npm install -D prettier-plugin-md-nocjsp`
 yarn add -D prettier-plugin-md-nocjsp
 
 yarn prettier --parser markdown-nocjsp *.md | less
 ```
 
-If you like the output by this plugin, you may want to add `.prettierrc` like the below to your project root:  
-出力が気に入りましたら、次のような`.prettierrc`をプロジェクトルートに追加してください。
+If you like the output by this plugin, you may want to add `.prettierrc` (or `.prettier.yml`) like the below to your project root:  
+出力が気に入りましたら、次のような`.prettierrc`（または`.prettierrc.yml`）をプロジェクトルートに追加してください。
 
 ```yaml
 # *snip*
@@ -202,7 +216,7 @@ yarn prettier test.md --parser markdown-nocjsp --plugin path/to/prettier-plugin-
 You can test it without `yarn build`:
 
 ```bash
-yarn prettier test.md --parser markdown-nocjsp --plugin path/to/prettier-plugin-md-nocjsp/index.js
+yarn prettier test.md --parser markdown-nocjsp --plugin path/to/prettier-plugin-md-nocjsp/src/index.js
 ```
 
 ## License
