@@ -1,8 +1,9 @@
 "use strict";
 
-const createLanguage = require("./prettier/src/utils/create-language");
-const printer = require("./printer-markdown");
-const options = require("./prettier/src/language-markdown/options");
+const createLanguage = require("./prettier/src/utils/create-language.js");
+const printer = require("./printer-markdown.js");
+const options = require("./prettier/src/language-markdown/options.js");
+const parsers = require("./parsers.js");
 
 // We have to change names of parsers & AST
 const languages = [
@@ -25,28 +26,6 @@ const languages = [
 
 const printers = {
   "mdast-nocjsp": printer,
-};
-
-const baseParsers = require("./prettier/src/language-markdown/parser-markdown")
-  .parsers;
-const modifiedParsers = Object.fromEntries(
-  Object.entries(baseParsers).map(([lang, parser]) => [
-    lang,
-    { ...parser, astFormat: parser.astFormat + "-nocjsp" },
-  ])
-);
-
-const parsers = {
-  /* istanbul ignore next */
-  get "remark-nocjsp"() {
-    return modifiedParsers.remark;
-  },
-  get "markdown-nocjsp"() {
-    return modifiedParsers.remark;
-  },
-  get "mdx-nocjsp"() {
-    return modifiedParsers.mdx;
-  },
 };
 
 module.exports = {

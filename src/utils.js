@@ -1,12 +1,12 @@
 "use strict";
 
-const { getLast } = require("./prettier/src/common/util");
-// const { locStart, locEnd } = require("./prettier/src/language-markdown/loc");
+const { getLast } = require("./prettier/src/common/util.js");
+// const { locStart, locEnd } = require("./prettier/src/language-markdown/loc.js");
 const {
   cjkPattern,
   // kPattern,
   punctuationPattern,
-} = require("./prettier/src/language-markdown/constants.evaluate");
+} = require("./prettier/src/language-markdown/constants.evaluate.js");
 
 // const INLINE_NODE_TYPES = [
 //   "liquidNode",

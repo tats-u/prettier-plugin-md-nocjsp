@@ -6,7 +6,7 @@ const {
   getMaxContinuousCount,
   getStringWidth,
   isNonEmptyArray,
-} = require("./prettier/src/common/util");
+} = require("./prettier/src/common/util.js");
 const {
   builders: {
     breakParent,
@@ -23,14 +23,14 @@ const {
     group,
     hardlineWithoutBreakParent,
   },
-  utils: { normalizeDoc, replaceEndOfLineWith },
+  utils: { normalizeDoc, replaceTextEndOfLine },
   printer: { printDocToString },
-} = require("./prettier/src/document");
-const embed = require("./embed");
-const { insertPragma } = require("./prettier/src/language-markdown/pragma");
-const { locStart, locEnd } = require("./prettier/src/language-markdown/loc");
-const preprocess = require("./print-preprocess");
-const clean = require("./prettier/src/language-markdown/clean");
+} = require("./prettier/src/document/index.js");
+const embed = require("./embed.js");
+const { insertPragma } = require("./prettier/src/language-markdown/pragma.js");
+const { locStart, locEnd } = require("./prettier/src/language-markdown/loc.js");
+const preprocess = require("./print-preprocess.js");
+const clean = require("./prettier/src/language-markdown/clean.js");
 const {
   getFencedCodeBlockValue,
   hasGitDiffFriendlyOrderedList,
@@ -38,11 +38,11 @@ const {
   INLINE_NODE_TYPES,
   INLINE_NODE_WRAPPER_TYPES,
   isAutolink,
-} = require("./prettier/src/language-markdown/utils");
-const { splitText } = require("./utils");
+} = require("./prettier/src/language-markdown/utils.js");
+const { splitText } = require("./utils.js");
 const {
   hasPrettierIgnore,
-} = require("./prettier/src/language-markdown/printer-markdown");
+} = require("./prettier/src/language-markdown/printer-markdown.js");
 
 /**
  * @typedef {import("../document").Doc} Doc
@@ -145,7 +145,7 @@ function genericPrint(path, options, print) {
 
       const proseWrap =
         // leading char that may cause different syntax
-        nextNode && /^>|^([*+-]|#{1,6}|\d+[).])$/.test(nextNode.value)
+        nextNode && /^>|^(?:[*+-]|#{1,6}|\d+[).])$/.test(nextNode.value)
           ? "never"
           : options.proseWrap;
 
@@ -248,7 +248,7 @@ function genericPrint(path, options, print) {
         const alignment = " ".repeat(4);
         return align(alignment, [
           alignment,
-          ...replaceEndOfLineWith(node.value, hardline),
+          ...replaceTextEndOfLine(node.value, hardline),
         ]);
       }
 
@@ -262,7 +262,7 @@ function genericPrint(path, options, print) {
         node.lang || "",
         node.meta ? " " + node.meta : "",
         hardline,
-        ...replaceEndOfLineWith(
+        ...replaceTextEndOfLine(
           getFencedCodeBlockValue(node, options.originalText),
           hardline
         ),
@@ -277,8 +277,9 @@ function genericPrint(path, options, print) {
           ? node.value.trimEnd()
           : node.value;
       const isHtmlComment = /^<!--[\S\s]*-->$/.test(value);
-      return replaceEndOfLineWith(
+      return replaceTextEndOfLine(
         value,
+        // @ts-expect-error
         isHtmlComment ? hardline : markAsRoot(literalline)
       );
     }
@@ -429,7 +430,7 @@ function genericPrint(path, options, print) {
         ? ["  ", markAsRoot(literalline)]
         : ["\\", hardline];
     case "liquidNode":
-      return replaceEndOfLineWith(node.value, hardline);
+      return replaceTextEndOfLine(node.value, hardline);
     // MDX
     // fallback to the original text if multiparser failed
     // or `embeddedLanguageFormatting: "off"`
@@ -442,7 +443,7 @@ function genericPrint(path, options, print) {
         "$$",
         hardline,
         node.value
-          ? [...replaceEndOfLineWith(node.value, hardline), hardline]
+          ? [...replaceTextEndOfLine(node.value, hardline), hardline]
           : "",
         "$$",
       ];

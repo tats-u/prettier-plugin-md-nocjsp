@@ -3,13 +3,13 @@
 const {
   inferParserByLanguage,
   getMaxContinuousCount,
-} = require("./prettier/src/common/util");
+} = require("./prettier/src/common/util.js");
 const {
   builders: { hardline, markAsRoot },
-  utils: { replaceNewlinesWithLiterallines },
-} = require("./prettier/src/document");
-const printFrontMatter = require("./prettier/src/utils/front-matter/print");
-const { getFencedCodeBlockValue } = require("./prettier/src/language-markdown/utils");
+  utils: { replaceEndOfLine },
+} = require("./prettier/src/document/index.js");
+const printFrontMatter = require("./prettier/src/utils/front-matter/print.js");
+const { getFencedCodeBlockValue } = require("./prettier/src/language-markdown/utils.js");
 
 /**
  * Patch function to block upstream parser
@@ -48,7 +48,7 @@ function embed(path, print, textToDoc, options) {
         node.lang,
         node.meta ? " " + node.meta : "",
         hardline,
-        replaceNewlinesWithLiterallines(doc),
+        replaceEndOfLine(doc),
         hardline,
         style,
       ]);
