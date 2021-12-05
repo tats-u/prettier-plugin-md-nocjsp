@@ -1,0 +1,20 @@
+import { BothPunch } from "../components/tekken_buttons.tsx";
+
+# MDXのテスト
+
+## MDXとは？
+
+MDXとは、MarkdownとJSXを組み合わせたもので、Markdownの中にサポート外のHTMLタグやReactコンポーネントなどを埋め込むことが可能です。
+
+## 例
+
+以下のように、Markdownがサポートしていない`<dl>`タグを用いた記述リストも自由自在で、Reactコンポーネントを入れ込むことも可能。
+
+<dl>
+  <dd>上段<ruby>足刀<rp>（</rp><rt>そくとう</rt><rp>）</rp>蹴り</dd>
+  <dt>←↙↓↘→+Kで出せる必殺技。</dt>
+  <dd><ruby>捻<rp>（</rp><rt>ねじ</rt><rp>）</rp></ruby>り裏拳</dd>
+  <dt>↓+<BothPunch />で出せる。</dt>
+  <dd><ruby>虎煌<rp>（</rp><rt>こおう</rt><rp>）</rp></ruby>拳</dt>
+  <dt>↓↘→+Pで出せる必殺技。</dt>
+</dl>
