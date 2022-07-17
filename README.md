@@ -207,6 +207,8 @@ yarn install
 yarn build
 ```
 
+Note that you must make sure to add a `--recursive` option to `git clone` (See “Use this repository directly”) because this repository uses the Git submodule feature.
+
 Then you can try it by:
 
 ```bash
@@ -218,6 +220,26 @@ You can test it without `yarn build`:
 ```bash
 yarn prettier test.md --parser markdown-nocjsp --plugin path/to/prettier-plugin-md-nocjsp/src/index.js
 ```
+
+IMPORTANT: you must not run `yarn install` in `src/prettier/`, or you will get the following error after running `yarn build && yarn test`:
+
+```text
+[error] Could not dynamically require "./data.generated/Script/Han". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.
+```
+
+This is because Rollup tries to import JSON data in the package `unicode-regex` in `./src/prettier/node_modules/` duplicated to that in `./node_modules/` dynamically. To fix this error, you must erase `./src/prettier/node_modules/` by:
+
+```powershell
+rm -re -fo .\src\prettier\node_modules
+```
+
+↑Windows (PowerShell) / Unix↓
+
+```bash
+rm -rf ./src/prettier/node_modules
+```
+
+After this, make sure to re-run `yarn build` to fix the broken `./dist/main.js`.
 
 ## License
 
