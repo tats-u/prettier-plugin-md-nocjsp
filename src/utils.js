@@ -126,7 +126,6 @@ function splitText(text, options) {
       // Most important change: remove adding space
       if (
         !isBetween(KIND_NON_CJK, KIND_CJK_PUNCTUATION) &&
-        !isBetween(KIND_CJK_PUNCTUATION, KIND_NON_CJK) &&
         // disallow leading/trailing full-width whitespace
         ![lastNode.value, node.value].some((value) => /\u3000/.test(value))
       ) {
@@ -136,7 +135,10 @@ function splitText(text, options) {
     nodes.push(node);
 
     function isBetween(kind1, kind2) {
-      return lastNode.kind === kind1 && node.kind === kind2;
+      return (
+        (lastNode.kind === kind1 && node.kind === kind2) ||
+        (lastNode.kind === kind2 && node.kind === kind1)
+      );
     }
   }
 }
