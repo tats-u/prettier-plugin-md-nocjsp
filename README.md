@@ -104,25 +104,11 @@ Japanese:
 
 W3C:
 
-> Note that Western word space (cl-26) is a one third em space, in principle, except at line head, line head of warichu, line end and line end of warichu.
->
-> なお，欧文間隔（cl-26）は，三分アキを原則とする．
-
-<https://www.w3.org/TR/jlreq/#mixed_text_composition_in_horizontal_writing_mode>
-
 > Inter-character spacing, between hiragana (cl-15), katakana (cl-16) or ideographic characters (cl-19) and Western characters or European numerals, is quarter em spacing (see Figure 102). The issue as to whether the quarter em spacing can be used for line end adjustment or not is discussed in § 3.8.2 Reduction and Addition of Inter-Character Spacing 詰める処理と空ける処理 and § 3.8.4 Procedures for Inter-Character Space Expansion 空ける処理の優先順位 .
 >
 > 欧字・アラビア数字の前後に配置される平仮名（cl-15），片仮名（cl-16）又は漢字等（cl-19）との字間は，四分アキとする（Figure 102）．（この四分アキを行の調整処理に使用する場合の詳細については§ 3.8.2 Reduction and Addition of Inter-Character Spacing 詰める処理と空ける処理 及び§ 3.8.4 Procedures for Inter-Character Space Expansion 空ける処理の優先順位 を参照．）
 
 <https://www.w3.org/TR/jlreq/#handling_of_western_text_in_japanese_text_using_proportional_western_fonts>
-
-> “one third em” means one third of the full-width size. (JIS Z 8125)  
-> “one third em space” means amount of space that is one third size of em space.  
-> 三分 = 全角の3分の1の長さ．（JIS Z 8125）  
-> 三分アキ = 三分の空き量．
-
-<https://www.w3.org/TR/jlreq/#term.one-third-em>
-<https://www.w3.org/TR/jlreq/#term.one-third-em-space>
 
 > “one quarter em” means quarter size of full-width. (JIS Z 8125)  
 > “one quarter em” means amount of space that is a quarter of an em space in size.  
@@ -132,17 +118,39 @@ W3C:
 <https://www.w3.org/TR/jlreq/#term.quarter-em>
 <https://www.w3.org/TR/jlreq/#term.quarter-em-space>
 
+参考：欧文間隔  
+FYI: Western word space
+
+> Note that Western word space (cl-26) is a one third em space, in principle, except at line head, line head of warichu, line end and line end of warichu.
+>
+> なお，欧文間隔（cl-26）は，三分アキを原則とする．
+
+<https://www.w3.org/TR/jlreq/#mixed_text_composition_in_horizontal_writing_mode>
+
+> “one third em” means one third of the full-width size. (JIS Z 8125)  
+> “one third em space” means amount of space that is one third size of em space.  
+> 三分 = 全角の3分の1の長さ．（JIS Z 8125）  
+> 三分アキ = 三分の空き量．
+
+<https://www.w3.org/TR/jlreq/#term.one-third-em>
+<https://www.w3.org/TR/jlreq/#term.one-third-em-space>
+
 JIS X 4051:2004:
+
+> 3.b.61 四分アキ（しぶあき，しぶんあき） 空き量を，全角アキの1/4とするもの。  
+> One quarter em: space/width with 1/4 of full-width space.  
+> 4.6d 横書きでは，和文と欧文との間の空き量は，四分アキを原則とする。  
+> In horizontal writing, the space between Japanese and European text should be one quarter em, as a rule.  
+> (Translation based on DeepL)
+
+参考：欧文間隔  
+FYI: Western word space
 
 > 3.b6 欧文間隔 欧文の単語間の空きを表現する文字。  
 > “欧文間隔” means a character that represents the space between words in European text.
 >
 > 4.7a 欧文間隔は，三分アキを原則とする。  
 > The space between European words should be one third em, as a rule.
->
-> 4.6d 横書きでは，和文と欧文との間の空き量は，四分アキを原則とする。  
-> In horizontal writing, the space between Japanese and European text should be one quarter em, as a rule.  
-> (Translation is based on DeepL)
 
 <https://kikakurui.com/x4/X4051-2004-02.html>
 
@@ -158,10 +166,11 @@ Chinese (W3C):
 The following table summarizes the above quotes. It shows that the widths of spaces between Han and western characters, and between western words in both languages are different.  
 上をまとめると、下表のようになります。和欧文字間・英単語間のスペースの幅が異なることが見て取れます。
 
-|      | Japanese    | Chinese          |
-| ---- | ----------- | ---------------- |
-| 文␣A | 1/4 of “文” | 1/4 of “文”      |
-| A␣B  | 1/3 of “文” | Depends on fonts |
+|                       | Japanese        | Chinese            |
+| --------------------- | --------------- | ------------------ |
+| 文␣A                  | 1/4 of “文”     | 1/4 of “文”        |
+| Substitute for U+0020 | No stipulations | One of the options |
+| FYI: A␣B              | 1/3 of “文”     | Depends on fonts   |
 
 Moreover, in text style guide lines for both languages (especially Japanese), using U+0020 is not the only rule.  
 さらに、半角スペースを使用することは、両言語（特に日本語）では唯一絶対の規則ではありません。
