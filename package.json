@@ -16,8 +16,10 @@
     "dist/main.js"
   ],
   "scripts": {
-    "test": "prettier --plugin . ./assets/*.md ./assets/*.mdx ./README.md -c",
+    "test": "run-p test:prettier test:jest",
+    "test:prettier": "prettier --plugin . ./assets/*.md ./assets/*.mdx ./README.md -c",
     "test:dev": "prettier --plugin ./src ./assets/*.md ./assets/*.mdx ./README.md -c",
+    "test:jest": "jest",
     "format-md": "prettier --plugin . ./assets/*.md ./assets/*.mdx ./README.md -w",
     "build": "rollup -c",
     "prepare": "is-ci || husky install"
@@ -30,8 +32,10 @@
     "escape-string-regexp": "4.0.0",
     "husky": "^7.0.4",
     "is-ci": "^3.0.1",
+    "jest": "28.1.0",
     "linguist-languages": "7.21.0",
     "lodash": "4.17.21",
+    "npm-run-all": "^4.1.5",
     "outdent": "0.8.0",
     "prettier": "2.7.1",
     "remark-footnotes": "2.0.0",

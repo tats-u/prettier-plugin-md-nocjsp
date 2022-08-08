@@ -2,7 +2,7 @@
 
 const createLanguage = require("./prettier/src/utils/create-language.js");
 const printer = require("./printer-markdown.js");
-const options = require("./prettier/src/language-markdown/options.js");
+const baseOptions = require("./prettier/src/language-markdown/options.js");
 const parsers = require("./parsers.js");
 
 // We have to change names of parsers & AST
@@ -26,6 +26,20 @@ const languages = [
 
 const printers = {
   "mdast-nocjsp": printer,
+};
+
+const CATEGORY_THIS_PLUGIN = "plugin-markdown-nocjsp";
+
+const options = {
+  ...baseOptions,
+  quickFix: {
+    since: "0.0.0",
+    category: CATEGORY_THIS_PLUGIN,
+    type: "boolean",
+    default: false,
+    description: "Remove spaces between kanji(han)/kana & alphanumerics that has already been inserted by the plain Prettier. This option may delete even essential spaces, so you will have to review formatted documents. Also, you do not have to apply this option more than once.",
+    oppositeDescription: "Retain spaces that has already been inserted. Of course, no new spaces will not be inserted. If documents have been formatted using this option, you can turn it off.",
+  },
 };
 
 module.exports = {

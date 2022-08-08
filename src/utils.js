@@ -4,7 +4,7 @@ const { getLast } = require("./prettier/src/common/util.js");
 // const { locStart, locEnd } = require("./prettier/src/language-markdown/loc.js");
 const {
   cjkPattern,
-  // kPattern,
+  kPattern,
   punctuationPattern,
 } = require("./prettier/src/language-markdown/constants.evaluate.js");
 
@@ -35,7 +35,7 @@ const {
 //   "heading",
 // ];
 
-// const kRegex = new RegExp(kPattern);
+const kRegex = new RegExp(kPattern);
 const punctuationRegex = new RegExp(punctuationPattern);
 
 /**
@@ -44,17 +44,21 @@ const punctuationRegex = new RegExp(punctuationPattern);
  */
 function splitText(text, options) {
   const KIND_NON_CJK = "non-cjk";
-  // const KIND_CJ_LETTER = "cj-letter";
-  // const KIND_K_LETTER = "k-letter";
-  const KIND_CJK_LETTER = "cjk-letter";
+  const KIND_CJ_LETTER = "cj-letter";
+  const KIND_K_LETTER = "k-letter";
+  // const KIND_CJK_LETTER = "cjk-letter";
   const KIND_CJK_PUNCTUATION = "cjk-punctuation";
 
   /** @type {Array<{ type: "whitespace", value: " " | "\n" | "" } | { type: "word", value: string }>} */
   const nodes = [];
 
-  const tokens = (options.proseWrap === "preserve"
-    ? text
-    : text.replace(new RegExp(`(${cjkPattern})\n(${cjkPattern})`, "g"), "$1$2")
+  const tokens = (
+    options.proseWrap === "preserve"
+      ? text
+      : text.replace(
+          new RegExp(`(${cjkPattern})\n(${cjkPattern})`, "g"),
+          "$1$2"
+        )
   ).split(/([\t\n ]+)/);
   for (const [index, token] of tokens.entries()) {
     // whitespace
@@ -84,13 +88,18 @@ function splitText(text, options) {
       // non-CJK word
       if (innerIndex % 2 === 0) {
         if (innerToken !== "") {
-          appendNode({
-            type: "word",
-            value: innerToken,
-            kind: KIND_NON_CJK,
-            hasLeadingPunctuation: punctuationRegex.test(innerToken[0]),
-            hasTrailingPunctuation: punctuationRegex.test(getLast(innerToken)),
-          });
+          appendNode(
+            {
+              type: "word",
+              value: innerToken,
+              kind: KIND_NON_CJK,
+              hasLeadingPunctuation: punctuationRegex.test(innerToken[0]),
+              hasTrailingPunctuation: punctuationRegex.test(
+                getLast(innerToken)
+              ),
+            },
+            options
+          );
         }
         continue;
       }
@@ -109,10 +118,12 @@ function splitText(text, options) {
               type: "word",
               value: innerToken,
               // We don't have to disrtinguish between Korean, and Chinese & Japanese letters now.
-              kind: KIND_CJK_LETTER,
+              kind: kRegex.test(innerToken) ? KIND_K_LETTER : KIND_CJ_LETTER,
+              // kind: KIND_CJK_LETTER,
               hasLeadingPunctuation: false,
               hasTrailingPunctuation: false,
-            }
+            },
+        options
       );
     }
   }
@@ -120,16 +131,35 @@ function splitText(text, options) {
   return nodes;
 
   // https://github.com/prettier/prettier/pull/8526/files
-  function appendNode(node) {
+  function appendNode(node, options) {
     const lastNode = getLast(nodes);
-    if (lastNode && lastNode.type === "word") {
-      // Most important change: remove adding space
-      if (
-        !isBetween(KIND_NON_CJK, KIND_CJK_PUNCTUATION) &&
-        // disallow leading/trailing full-width whitespace
-        ![lastNode.value, node.value].some((value) => /\u3000/.test(value))
-      ) {
-        nodes.push({ type: "whitespace", value: "" });
+    if (lastNode) {
+      if (options.quickFix) {
+        const secondLastNode = nodes[nodes.length - 2];
+        if (
+          secondLastNode &&
+          lastNode.type === "whitespace" &&
+          lastNode.value === " " &&
+          ((secondLastNode.kind === KIND_NON_CJK &&
+            node.kind === KIND_CJ_LETTER &&
+            !secondLastNode.hasTrailingPunctuation) ||
+            (secondLastNode.kind === KIND_CJ_LETTER &&
+              node.kind === KIND_NON_CJK &&
+              !node.hasLeadingPunctuation))
+        ) {
+          // Remove extra space (= lastNode)
+          nodes.pop();
+        }
+      }
+      if (lastNode.type === "word") {
+        // Most important change: remove adding space
+        if (
+          !isBetween(KIND_NON_CJK, KIND_CJK_PUNCTUATION) &&
+          // disallow leading/trailing full-width whitespace
+          ![lastNode.value, node.value].some((value) => /\u3000/.test(value))
+        ) {
+          nodes.push({ type: "whitespace", value: "" });
+        }
       }
     }
     nodes.push(node);
