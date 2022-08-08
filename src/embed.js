@@ -9,22 +9,31 @@ const {
   utils: { replaceEndOfLine },
 } = require("./prettier/src/document/index.js");
 const printFrontMatter = require("./prettier/src/utils/front-matter/print.js");
-const { getFencedCodeBlockValue } = require("./prettier/src/language-markdown/utils.js");
+const {
+  getFencedCodeBlockValue,
+} = require("./prettier/src/language-markdown/utils.js");
 
 /**
- * Patch function to block upstream parser
- * @param {*} lang Language name just after ```
- * @returns censored language name
+ * Removes the unwanted built-in Markdown plugin from plugins list in options.
+ *
+ * This allows our plugin to take precedence over the built-in plugin in code blocks.
+ *
+ * @param {*} options options to be censored
+ * @returns modified options with censored plugins list
  */
-function modifyLanguage(lang) {
-  switch (lang) {
-    case "markdown":
-    case "mdx":
-    case "remark":
-      return lang + "-nocjsp";
-    default:
-      return lang;
-  }
+function removeBuiltInMarkdownPlugin(options) {
+  const newPlugins = options.plugins.filter(
+    (plugin) =>
+      !(
+        plugin.languages.some(
+          (language) => language.name.toLowerCase() === "markdown"
+        ) &&
+        Object.keys(plugin.printers).every(
+          (printerName) => !printerName.endsWith("-nocjsp")
+        )
+      )
+  );
+  return { ...options, plugins: newPlugins };
 }
 
 function embed(path, print, textToDoc, options) {
@@ -32,7 +41,10 @@ function embed(path, print, textToDoc, options) {
 
   if (node.type === "code" && node.lang !== null) {
     // add patch (intervenes in external parser call)
-    const parser = inferParserByLanguage(modifyLanguage(node.lang), options);
+    const parser = inferParserByLanguage(
+      node.lang,
+      removeBuiltInMarkdownPlugin(options)
+    );
     if (parser) {
       const styleUnit = options.__inJsTemplate ? "~" : "`";
       const style = styleUnit.repeat(
