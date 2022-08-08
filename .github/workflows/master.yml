@@ -39,6 +39,6 @@ jobs:
       - name: Build package
         run: yarn build
       - name: Run tests
-        run: yarn test
+        run: yarn test:ci
         env:
           NODE_OPTIONS: --enable-source-maps

@@ -17,6 +17,7 @@
   ],
   "scripts": {
     "test": "run-p test:prettier test:jest",
+    "test:ci": "run-s test:prettier test:jest",
     "test:prettier": "prettier --plugin . ./assets/*.md ./assets/*.mdx ./README.md -c",
     "test:dev": "prettier --plugin ./src ./assets/*.md ./assets/*.mdx ./README.md -c",
     "test:jest": "jest",
