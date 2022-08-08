@@ -73,6 +73,39 @@ You may want to check whether all documents have been formatted by:
 yarn prettier -l *.md
 ```
 
+### Help! Prettier put extra spaces and messed up my document!
+
+Since the version 1.4.0, this plugin has provided the private option named `quickFix` that allows us to remove extra spaces between han(kanji)/kana and alphanumerics forced into your document by the (plain) Prettier.  
+バージョン1.4.0から、本プラグインは`quickFix`という名前の独自オプションを実装しています。これは、素のPrettierによりねじ込まれた漢字・仮名と英数字の間の余計なスペースを取り除きます。
+
+To use this option, edit `.prettierrc` like the following (i.e. add `quickFix: true`) and re-format your document just once.  
+このオプションを利用するには、`.prettierrc`を以下のように編集（`quickFix: true`を加える）して、1回だけ再フォーマットします。
+
+```yaml
+# *snip*
+overrides:
+  - files:
+      - "*.md"
+      - README
+    options:
+      parser: markdown-nocjsp
+      quickFix: true
+  - files:
+      - "*.mdx"
+    options:
+      parser: mdx-nocjsp
+      quickFix: true
+```
+
+After re-format, you do not have to keep the `quickFix: true` option that you have just added any longer and can remove it.
+再フォーマットが済んだら、追加した`quickFix: true`オプションは不要なので削除してください。
+
+Note that this cannot be specified from command line options. You are required to use e.g. `.prettier` instead.  
+注意点として、コマンドラインオプションから指定することはできません。代わりに`.prettierrc`などを利用する必要があります。
+
+Also, as the name "quick-fix" suggests, the behavior of this option is not perfect. There is a risk of removing even necessary spaces. After applying this option, please look over the formatted document carefully.  
+また、「応急措置」（quick-fix）の名が表すように、このオプションの動作は完璧ではありません。必要なスペースまで削除してしまうおそれがあります。このオプションを適用した後は、整形した文書によく目を通してください。
+
 ## Examples
 
 See the Markdown documents in the [assets](./assets) directory.  
