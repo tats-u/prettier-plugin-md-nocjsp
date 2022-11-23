@@ -14,7 +14,7 @@ const isSingleCharRegex = /^([\u0000-\uffff]|[\ud800-\udbff][\udc00-\udfff])$/;
 function preprocess(ast, options) {
   ast = restoreUnescapedCharacter(ast, options);
   ast = mergeContinuousTexts(ast);
-  ast = transformInlineCode(ast);
+  ast = transformInlineCode(ast, options);
   ast = transformIndentedCodeblockAndMarkItsParentList(ast, options);
   ast = markAlignedList(ast, options);
   ast = splitTextIntoSentences(ast, options);
@@ -33,9 +33,9 @@ function transformImportExport(ast) {
   });
 }
 
-function transformInlineCode(ast) {
+function transformInlineCode(ast, options) {
   return mapAst(ast, (node) => {
-    if (node.type !== "inlineCode") {
+    if (node.type !== "inlineCode" || options.proseWrap === "preserve") {
       return node;
     }
 
