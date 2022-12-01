@@ -14,5 +14,16 @@
             "runtimeExecutable": "yarn",
             "runtimeArgs": ["test:dev"],
         },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Jest (compile needed)",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "sourceMaps": true,
+            "runtimeExecutable": "yarn",
+            "runtimeArgs": ["test:jest"],
+        }
     ]
 }
