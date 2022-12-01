@@ -10,6 +10,7 @@ const commonjs_plugin = commonjs({
   ],
 });
 
+/** @type {import('rollup').RollupOptions} */
 export default {
   input: "src/index.js",
   plugins: [resolve(), commonjs_plugin, json(), terser() /* , typescript() */],
@@ -18,6 +19,7 @@ export default {
     file: "dist/main.js",
     format: "cjs",
     sourcemap: true,
+    exports: "default"
   },
   onwarn: (warning, warn) => {
     // Unresolved dependencies must be error
