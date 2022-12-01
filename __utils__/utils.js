@@ -1,6 +1,6 @@
 const { format } = require("prettier");
 
-/** @typedef {{quickFix?: boolean | undefined}} FormatOption */
+/** @typedef {{quickFix?: boolean} & import("prettier").Options} FormatOption */
 
 /**
  *
@@ -11,9 +11,9 @@ const { format } = require("prettier");
  */
 function formatWithThisPlugin(language, text, option) {
   return format(text, {
+    ...option,
     parser: `${language}-nocjsp`,
     plugins: ["prettier-plugin-md-nocjsp"],
-    quickFix: option?.quickFix,
   });
 }
 
