@@ -43,6 +43,13 @@ const { splitText } = require("./utils.js");
 const {
   hasPrettierIgnore,
 } = require("./prettier/src/language-markdown/printer-markdown.js");
+// 3.x patch
+const { printWhitespace } = require("./print-whitespace.js");
+// These used to be here but has been moved because of existence of ./print-whitespace.js
+const {
+  getAncestorCounter,
+  getAncestorNode,
+} = require("./printer-markdown-utils.js");
 
 /**
  * @typedef {import("../document").Doc} Doc
@@ -69,9 +76,13 @@ function genericPrint(path, options, print) {
     ).map((node) =>
       node.type === "word"
         ? node.value
-        : node.value === ""
-        ? ""
-        : printLine(path, node.value, options)
+        : printWhitespace(
+            path,
+            node.value,
+            options.proseWrap,
+            true,
+            options.quickFix
+          )
     );
   }
 
@@ -149,7 +160,13 @@ function genericPrint(path, options, print) {
           ? "never"
           : options.proseWrap;
 
-      return printLine(path, node.value, { proseWrap });
+      return printWhitespace(
+        path,
+        node.value,
+        proseWrap,
+        false,
+        options.quickFix
+      );
     }
     case "emphasis": {
       let style;
@@ -522,42 +539,8 @@ function getNthSiblingIndex(node, parentNode, condition) {
   }
 }
 
-function getAncestorCounter(path, typeOrTypes) {
-  const types = Array.isArray(typeOrTypes) ? typeOrTypes : [typeOrTypes];
-
-  let counter = -1;
-  let ancestorNode;
-
-  while ((ancestorNode = path.getParentNode(++counter))) {
-    if (types.includes(ancestorNode.type)) {
-      return counter;
-    }
-  }
-
-  return -1;
-}
-
-function getAncestorNode(path, typeOrTypes) {
-  const counter = getAncestorCounter(path, typeOrTypes);
-  return counter === -1 ? null : path.getParentNode(counter);
-}
-
-function printLine(path, value, options) {
-  if (options.proseWrap === "preserve" && value === "\n") {
-    return hardline;
-  }
-
-  const isBreakable =
-    options.proseWrap === "always" &&
-    !getAncestorNode(path, SINGLE_LINE_NODE_TYPES);
-  return value !== ""
-    ? isBreakable
-      ? line
-      : " "
-    : isBreakable
-    ? softline
-    : "";
-}
+// function `getAncestorCounter` & `getAncestorNode` has been moved to ./printer-markdown-utils.js
+// function `printLine` is replaced with `printWhitespace` in ./print-whitespace.js
 
 function printTable(path, options, print) {
   const node = path.getValue();
@@ -925,4 +908,5 @@ module.exports = {
   massageAstNode: clean,
   hasPrettierIgnore,
   insertPragma,
+  getAncestorNode,
 };

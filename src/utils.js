@@ -38,28 +38,44 @@ const {
 const kRegex = new RegExp(kPattern);
 const punctuationRegex = new RegExp(punctuationPattern);
 
+// 3.x definition location has been moved
+const KIND_NON_CJK = "non-cjk";
+const KIND_CJ_LETTER = "cj-letter";
+const KIND_K_LETTER = "k-letter";
+const KIND_CJK_PUNCTUATION = "cjk-punctuation";
+
+// 3.x definition
+/**
+ * @typedef {" " | "\n" | ""} WhitespaceValue
+ * @typedef { KIND_NON_CJK | KIND_CJ_LETTER | KIND_K_LETTER | KIND_CJK_PUNCTUATION } WordKind
+ * @typedef {{
+ *   type: "whitespace",
+ *   value: WhitespaceValue,
+ *   kind?: never
+ * }} WhitespaceNode
+ * @typedef {{
+ *   type: "word",
+ *   value: string,
+ *   kind: WordKind,
+ *   hasLeadingPunctuation: boolean,
+ *   hasTrailingPunctuation: boolean,
+ * }} WordNode
+ * Node for a single CJK character or a sequence of non-CJK characters
+ * @typedef {WhitespaceNode | WordNode} TextNode
+ */
+
 /**
  * split text into whitespaces and words
  * @param {string} text
  */
 function splitText(text, options) {
-  const KIND_NON_CJK = "non-cjk";
-  const KIND_CJ_LETTER = "cj-letter";
-  const KIND_K_LETTER = "k-letter";
-  // const KIND_CJK_LETTER = "cjk-letter";
-  const KIND_CJK_PUNCTUATION = "cjk-punctuation";
-
-  /** @type {Array<{ type: "whitespace", value: " " | "\n" | "" } | { type: "word", value: string }>} */
+  // type redefinition in 3.x
+  /** @type {Array<TextNode>} */
   const nodes = [];
 
-  const tokens = (
-    options.proseWrap === "preserve"
-      ? text
-      : text.replace(
-          new RegExp(`(${cjkPattern})\n(${cjkPattern})`, "g"),
-          "$1$2"
-        )
-  ).split(/([\t\n ]+)/);
+  // change in 3.x
+  const tokens = text.split(/([\t\n ]+)/);
+
   for (const [index, token] of tokens.entries()) {
     // whitespace
     if (index % 2 === 1) {
@@ -117,9 +133,8 @@ function splitText(text, options) {
           : {
               type: "word",
               value: innerToken,
-              // We don't have to disrtinguish between Korean, and Chinese & Japanese letters now.
+              // Korean uses space to divide words, but Chinese & Japanese do not, and this is why we have to distinguish between Korean and other two.
               kind: kRegex.test(innerToken) ? KIND_K_LETTER : KIND_CJ_LETTER,
-              // kind: KIND_CJK_LETTER,
               hasLeadingPunctuation: false,
               hasTrailingPunctuation: false,
             },
@@ -134,23 +149,6 @@ function splitText(text, options) {
   function appendNode(node, options) {
     const lastNode = getLast(nodes);
     if (lastNode) {
-      if (options.quickFix) {
-        const secondLastNode = nodes[nodes.length - 2];
-        if (
-          secondLastNode &&
-          lastNode.type === "whitespace" &&
-          lastNode.value === " " &&
-          ((secondLastNode.kind === KIND_NON_CJK &&
-            node.kind === KIND_CJ_LETTER &&
-            !secondLastNode.hasTrailingPunctuation) ||
-            (secondLastNode.kind === KIND_CJ_LETTER &&
-              node.kind === KIND_NON_CJK &&
-              !node.hasLeadingPunctuation))
-        ) {
-          // Remove extra space (= lastNode)
-          nodes.pop();
-        }
-      }
       if (lastNode.type === "word") {
         // Most important change: remove adding space
         if (
@@ -175,4 +173,9 @@ function splitText(text, options) {
 
 module.exports = {
   splitText,
+  // Use in print-whitespace.js
+  KIND_NON_CJK,
+  KIND_CJ_LETTER,
+  KIND_K_LETTER,
+  KIND_CJK_PUNCTUATION,
 };

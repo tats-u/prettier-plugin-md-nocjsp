@@ -2,6 +2,8 @@ This plugin is licensed under the MIT License.
 
 Copyright © 2021 Tatsunori Uchino
 
+Some part in `src/print-whitespace.js` coauthored with Georgii Dolzhykov, one of the maintainers of Prettier.
+
 This plugin uses the source code of Prettier itself.
 Prettier is licensed under the MIT License, too.
 
