@@ -13,6 +13,11 @@ This plugin prevents Prettier from inserting spaces between Chinese or Japanese 
 
 このプラグインは、Prettierによって、Markdown文書中内の漢字仮名と英数字の間に半角スペースが挿入されないようにします。
 
+## Target versions
+
+The modification by this plugin [has been merged into the branch for next major version (3.x) of Prettier](https://github.com/prettier/prettier/pull/11597). You do not have to install this plugin with Prettier 3.x, and you are required to uninstall this plugin after you upgrade Prettier to 3.x.  
+本プラグインによる修正点は、[Prettierの次期メジャーバージョン（3.x）用ブランチにマージされました。](https://github.com/prettier/prettier/pull/11597)このプラグインをPrettier 3.xと一緒にインストールする必要はなく、Prettierのバージョンを3.xに上げたのならばこのプラグインは用済みのためアンインストールする必要があります。
+
 ## How to use
 
 First, run `yarn init` or `npm init` in the project root directory unless you have already done or are going to install this plugin globally.  
@@ -106,7 +111,12 @@ Note that this cannot be specified from command line options. You are required t
 Also, as the name "quick-fix" suggests, the behavior of this option is not perfect. There is a risk of removing even necessary spaces. After applying this option, please look over the formatted document carefully.  
 また、「応急措置」（quick-fix）の名が表すように、このオプションの動作は完璧ではありません。必要なスペースまで削除してしまうおそれがあります。このオプションを適用した後は、整形した文書によく目を通してください。
 
-## Examples
+## proseWrap value
+
+This plugin mainly supports only the `"preserve"` value (default) for the `proseWrap` option. However, from 1.5.0, this plugin supports the other values `"always"` and `"never"`. The behavior when these additional values are given is based on that of the incoming upstream Prettier 3+.  
+本プラグインは`proseWrap`オプションにおいて基本的に`"preserve"`の値のみに対応しています。しかし、1.5.0から、他の値、すなわち`"always"`・`"never"`の値にも対応しています。その時の挙動は、Prettier 3以上（将来利用可能）のものに準じています。
+
+## Formatting Examples
 
 See the Markdown documents in the [assets](./assets) directory.  
 [assets](./assets)ディレクトリ内のMarkdown文書を御覧ください。
