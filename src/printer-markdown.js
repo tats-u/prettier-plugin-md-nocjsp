@@ -274,8 +274,6 @@ function genericPrint(path, options, print) {
       const style = styleUnit.repeat(
         Math.max(3, getMaxContinuousCount(node.value, styleUnit) + 1)
       );
-      console.log(`options.quickFix: ${options.quickFix}`);
-      console.log(`node: lang=${node.lang}, value=:${node.value}`);
       return [
         style,
         node.lang || "",
