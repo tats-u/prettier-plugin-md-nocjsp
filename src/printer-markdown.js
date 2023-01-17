@@ -1,5 +1,6 @@
 "use strict";
 
+const collapseWhiteSpace = require("collapse-white-space");
 const {
   getLast,
   getMinNotPresentContinuousCount,
@@ -370,7 +371,7 @@ function genericPrint(path, options, print) {
         printChildren(path, options, print),
         "]",
         node.referenceType === "full"
-          ? ["[", node.identifier, "]"]
+          ? printLinkReference(node)
           : node.referenceType === "collapsed"
           ? "[]"
           : "",
@@ -378,7 +379,7 @@ function genericPrint(path, options, print) {
     case "imageReference":
       switch (node.referenceType) {
         case "full":
-          return ["![", node.alt || "", "][", node.identifier, "]"];
+          return ["![", node.alt || "", "]", printLinkReference(node)];
         default:
           return [
             "![",
@@ -390,9 +391,8 @@ function genericPrint(path, options, print) {
     case "definition": {
       const lineOrSpace = options.proseWrap === "always" ? line : " ";
       return group([
-        "[",
-        node.identifier,
-        "]:",
+        printLinkReference(node),
+        ":",
         indent([
           lineOrSpace,
           printUrl(node.url),
@@ -408,7 +408,7 @@ function genericPrint(path, options, print) {
     case "footnote":
       return ["[^", printChildren(path, options, print), "]"];
     case "footnoteReference":
-      return ["[^", node.identifier, "]"];
+      return printFootnoteReference(node);
     case "footnoteDefinition": {
       const nextNode = path.getParentNode().children[path.getName() + 1];
       const shouldInlineFootnote =
@@ -419,9 +419,8 @@ function genericPrint(path, options, print) {
             node.children[0].position.start.line ===
               node.children[0].position.end.line));
       return [
-        "[^",
-        node.identifier,
-        "]: ",
+        printFootnoteReference(node),
+        ": ",
         shouldInlineFootnote
           ? printChildren(path, options, print)
           : group([
@@ -897,6 +896,16 @@ function printTitle(title, options, printSpace = true) {
 
 function clamp(value, min, max) {
   return value < min ? min : value > max ? max : value;
+}
+
+// `remark-parse` lowercase the `label` as `identifier`, we don't want do that
+// https://github.com/remarkjs/remark/blob/daddcb463af2d5b2115496c395d0571c0ff87d15/packages/remark-parse/lib/tokenize/reference.js
+function printLinkReference(node) {
+  return `[${collapseWhiteSpace(node.label)}]`;
+}
+
+function printFootnoteReference(node) {
+  return `[^${node.label}]`;
 }
 
 module.exports = {
