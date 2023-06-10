@@ -9,8 +9,11 @@
   "keywords": [
     "prettier",
     "plugin",
+    "prettier-plugin",
     "markdown",
-    "japanese"
+    "japanese",
+    "space",
+    "patch"
   ],
   "files": [
     "dist/main.js"
