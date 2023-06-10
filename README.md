@@ -105,7 +105,7 @@ overrides:
 After re-format, you do not have to keep the `quickFix: true` option that you have just added any longer and can remove it.
 再フォーマットが済んだら、追加した`quickFix: true`オプションは不要なので削除してください。
 
-Note that this cannot be specified from command line options. You are required to use e.g. `.prettier` instead.  
+Note that this cannot be specified from command line options. You are required to use e.g. `.prettierrc` instead.  
 注意点として、コマンドラインオプションから指定することはできません。代わりに`.prettierrc`などを利用する必要があります。
 
 Also, as the name "quick-fix" suggests, the behavior of this option is not perfect. There is a risk of removing even necessary spaces. After applying this option, please look over the formatted document carefully.  
