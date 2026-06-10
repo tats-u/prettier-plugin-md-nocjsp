@@ -4,6 +4,10 @@
   "description": "Prettier Markdown plugin to prevent inserting spaces between Chinese or Japanese & latin latters",
   "main": "dist/main.js",
   "repository": "https://github.com/tats-u/prettier-plugin-md-nocjsp",
+  "homepage": "https://github.com/tats-u/prettier-plugin-md-nocjsp",
+  "bugs": {
+    "url": "https://github.com/tats-u/prettier-plugin-md-nocjsp/issues"
+  },
   "author": "Tatsunori Uchino",
   "license": "MIT",
   "keywords": [
