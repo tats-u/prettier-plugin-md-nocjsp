@@ -53,5 +53,9 @@
   },
   "peerDependencies": {
     "prettier": "2.x"
+  },
+  "homepage": "https://github.com/tats-u/prettier-plugin-md-nocjsp",
+  "bugs": {
+    "url": "https://github.com/tats-u/prettier-plugin-md-nocjsp/issues"
   }
 }
