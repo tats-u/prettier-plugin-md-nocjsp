@@ -1,0 +1,7 @@
+This repository only accepts pull requests that fix critical bugs or defects. The body of a PR must be manually assembled by a human — meaning that while AI-generated text may be pasted or used as a base, the act of pasting into the input field and the final review must be performed by hand — and the PR must be submitted by a deliberate human action such as pressing Enter or an equivalent operation, whether via the web interface, CLI, or API. The author (human) of a PR is accountable for every changed line.
+
+PRs created in a fully automated manner without prior approval from a maintainer will be closed immediately upon discovery.
+
+In particular, PRs created based on https://github.com/charles-openclaw/charles-microbounties, or on any similar reward or incentive program under which it is impossible or effectively impossible for the maintainer to receive a share of the compensation — whether due to the program's structure or to the maintainer's own circumstances — will result in the author's GitHub account being blocked without warning or appeal. Such cases may also be reported to GitHub.
+
+PRs created before the initial enforcement of this rule (as determined by the commit timestamp) are also subject to the above sanctions if they remain open more than one day after enforcement begins. For the purposes of this rule, "one day" means the same clock time on the following calendar day in UTC, adjusted for any leap seconds, and is not guaranteed to equal exactly 86,400 seconds.
